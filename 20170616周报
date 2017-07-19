@@ -1,0 +1,8 @@
+1、配合排查cdh服务器yarn的GC时间过长问题，由于old空间太小，导致一直触发GC停顿，需要调整java堆大小。
+2、收尾storm帖子统计代码，修改线上storm的zkRoot路径，并部署替换生产。
+3、查看目前node3的hbase集群负载高的情况，IO读写很大，hbase也经常Memstore flush，借此进一步熟悉集群CDH环境。目前先将实时离线场景分离开，然后在观察集群负载情况，如果还是比较高，如下建议：
+1）可能需要优化涉及到的三张表的业务层的代码：MeetURec_user_pairCount，MeetURec_user_browse_history，user_click_ga，news_action_statinfo。
+scan、Get、Put操作进行优化。
+2）hbase服务端，打印GC日志详细，缓存配置优化等。
+
+部署三台测试机器，用于调研工作，调研cgoup
